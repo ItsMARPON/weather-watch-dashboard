@@ -56,3 +56,5 @@ function getWeather() {
       alert("Unable to connect to Weather API");
     });
 }
+
+// var displayWeather = function ();
