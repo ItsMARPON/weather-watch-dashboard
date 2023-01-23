@@ -1,1 +1,5 @@
-/* keep file */
+:root {
+  --primary: lightblue;
+  --secondary: rgb(84, 84, 227);
+  --border-radius: 0.3rem;
+}
