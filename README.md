@@ -14,6 +14,8 @@ Provide instructions and examples for use, inclue screenshots as needed
 
 ## Credits
 
+Weather source: https://openweathermap.org/forecast5
+
 ## License
 
 MIT License
