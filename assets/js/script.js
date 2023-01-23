@@ -4,6 +4,7 @@ var state = " ";
 var longitude = " ";
 var latitude = " ";
 var mainList = document.querySelector("ul");
+var cityNameButton = document.querySelector(".btn");
 
 function getCityOrGeo() {
   var requestCityUrl =
@@ -30,31 +31,33 @@ function getCityOrGeo() {
         var listLonItem = document.createElement("li");
         listLonItem.textContent = data[i].lon;
         mainList.appendChild(listLonItem);
+        console.log("It worked");
       }
     });
 }
-getCityOrGeo();
 
-function getWeather() {
-  var dataWeatherUrl =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
-    city +
-    "&appid=" +
-    APIKey;
+// function getWeather() {
+//   var dataWeatherUrl =
+//     "http://api.openweathermap.org/data/2.5/weather?q=" +
+//     city +
+//     "&appid=" +
+//     APIKey;
 
-  fetch(dataWeatherUrl)
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          displayWeather(data);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert("Unable to connect to Weather API");
-    });
-}
+//   fetch(dataWeatherUrl)
+//     .then(function (response) {
+//       if (response.ok) {
+//         response.json().then(function (data) {
+//           displayWeather(data);
+//         });
+//       } else {
+//         alert("Error: " + response.statusText);
+//       }
+//     })
+//     .catch(function (error) {
+//       alert("Unable to connect to Weather API");
+//     });
+// }
 
 // var displayWeather = function ();
+
+cityNameButton.addEventListener("click", getCityOrGeo);
