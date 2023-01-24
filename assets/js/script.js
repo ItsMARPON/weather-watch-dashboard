@@ -12,8 +12,12 @@ $(document).ready(function () {
   var today = dayjs();
   $("#currentDay").text(today.format("MMMM D, YYYY HH:mm A"));
 
-  function getCityInput () {
-    var cityName = $('#city').val();
-    
+  function getCityInput() {
+    $("#submit-btn").on("click", function (event) {
+      event.preventDefault();
+      var cityName = $("#city").val();
+      console.log(cityName);
+    });
   }
-  });
+  getCityInput();
+});
