@@ -2,7 +2,9 @@
 // Take user input for City Name (Location) and save to local storage and print to console.
 $(document).ready(function () {
   let mainList = document.querySelector("ul");
+  let weatherList = document.querySelector("#weather-data");
   let cityEl = document.querySelector("#city");
+  let city = localStorage.getItem("city") || [];
 
   // Get date and time
   let today = dayjs();
@@ -14,7 +16,6 @@ $(document).ready(function () {
       event.preventDefault();
       let cityName = $("#city").val();
       localStorage.setItem("city", JSON.stringify(cityName));
-      let city = localStorage.getItem("city") || [];
       city = JSON.parse(city);
       getCityOrGeo();
     });
@@ -27,7 +28,6 @@ $(document).ready(function () {
     let apiUrl = " https://api.openweathermap.org/geo/1.0/direct?q=";
     let limit = "&limit=5";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
-    // let city = "Minneapolis";
     let requestCityUrl = apiUrl + city + limit + APIKey;
 
     fetch(requestCityUrl)
@@ -54,46 +54,46 @@ $(document).ready(function () {
           listLonItem.textContent = data[i].lon;
           mainList.appendChild(listLonItem);
           console.log("It worked");
+          getWeatherData(data[i].lat, data[i].lon);
         }
       });
   }
 
-  //   function getWeatherData() {
-  //     let apiUrl2 = "https://api.openweathermap.org/data/2.5/forecast?";
-  //     let lat = "lat=44.34";
-  //     let lon = "&lon=10.99";
-  //     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
-  //     //   let longitude = "lat=" + listLonItem;
-  //     //   let latitude = "&lon=" + listLatItem;
+  function getWeatherData(listLatItem, listLonItem) {
+    let apiUrl2 = "https://api.openweathermap.org/data/2.5/forecast?";
+    //   let lat = "lat=44.34";
+    //   let lon = "&lon=10.99";
+    let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
+    let longitude = "&lon=" + listLonItem;
+    let latitude = "lat=" + listLatItem;
 
-  //     let requestDataUrl = apiUrl2 + lat + lon + APIKey;
+    let requestDataUrl = apiUrl2 + latitude + longitude + APIKey;
 
-  //     fetch(requestDataUrl)
-  //       .then(function (response) {
-  //         if (response.ok) {
-  //           console.log(response);
-  //           return response.json();
-  //         } else {
-  //           alert("Error2:" + response.statusText);
-  //         }
-  //       })
-  //       .then(function (data) {
-  //         for (var i = 0; i < data.length; i++) {
-  //           var listMainItem = document.createElement("li");
-  //           listMainItem.textContent = data[i].main;
-  //           mainList.appendChild(listMainItem);
-  //           var listWeatherItem = document.createElement("li");
-  //           listWeatherItem.textContent = data[i].weather;
-  //           mainList.appendChild(listWeatherItem);
-  //           var listCloudItem = document.createElement("li");
-  //           listCloudItem.textContent = data[i].cloud;
-  //           mainList.appendChild(listCloudItem);
-  //           var listWindItem = document.createElement("li");
-  //           listWindItem.textContent = data[i].wind;
-  //           mainList.appendChild(listWindItem);
-  //           console.log("It finally worked");
-  //         }
-  //       });
-  //   }
-  //   getWeatherData();
+    fetch(requestDataUrl)
+      .then(function (response) {
+        if (response.ok) {
+          console.log(response);
+          return response.json();
+        } else {
+          alert("Error2:" + response.statusText);
+        }
+      })
+      .then(function (data) {
+        for (var i = 0; i < data.length; i++) {
+          var listMainItem = document.createElement("li");
+          listMainItem.textContent = data[i].main;
+          weatherList.appendChild(listMainItem);
+          var listWeatherItem = document.createElement("li");
+          listWeatherItem.textContent = data[i].weather;
+          weatherList.appendChild(listWeatherItem);
+          var listCloudItem = document.createElement("li");
+          listCloudItem.textContent = data[i].cloud;
+          weatherList.appendChild(listCloudItem);
+          var listWindItem = document.createElement("li");
+          listWindItem.textContent = data[i].wind;
+          weatherList.appendChild(listWindItem);
+          console.log("It finally worked");
+        }
+      });
+  }
 });
