@@ -2,7 +2,9 @@
 // Take user input for City Name (Location) and save to local storage and print to console.
 $(document).ready(function () {
   let mainList = document.querySelector("ul");
-  let weatherList = document.querySelector("#weather-data");
+  let tempDataEl = document.querySelector("#temp-data");
+  let descriptionDataEl = document.querySelector("#description-data");
+  let windDataEl = document.querySelector("#wind-data");
   let cityEl = document.querySelector("#city");
   let city = localStorage.getItem("city") || [];
 
@@ -80,18 +82,15 @@ $(document).ready(function () {
       })
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          var listMainItem = document.createElement("li");
-          listMainItem.textContent = data[i].main;
-          weatherList.appendChild(listMainItem);
-          var listWeatherItem = document.createElement("li");
-          listWeatherItem.textContent = data[i].weather;
-          weatherList.appendChild(listWeatherItem);
-          var listCloudItem = document.createElement("li");
-          listCloudItem.textContent = data[i].cloud;
-          weatherList.appendChild(listCloudItem);
-          var listWindItem = document.createElement("li");
-          listWindItem.textContent = data[i].wind;
-          weatherList.appendChild(listWindItem);
+          var temp = document.createElement("p");
+          temp.textContent = data[i].main_temp;
+          tempDataEl.appendChild(temp);
+          var description = document.createElement("p");
+          description.textContent = data[i].weather_description;
+          descriptionDataEl.appendChild(description);
+          var wind = document.createElement("p");
+          wind.textContent = data[i].wind;
+          windDataEl.appendChild(wind);
           console.log("It finally worked");
         }
       });
