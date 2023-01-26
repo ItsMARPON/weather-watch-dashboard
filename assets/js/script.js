@@ -18,7 +18,6 @@ $(document).ready(function () {
       event.preventDefault();
       let cityName = $("#city").val();
       localStorage.setItem("city", JSON.stringify(cityName));
-      city = JSON.parse(city);
       getCityOrGeo();
     });
   }
@@ -28,7 +27,7 @@ $(document).ready(function () {
 
   function getCityOrGeo() {
     let apiUrl = " https://api.openweathermap.org/geo/1.0/direct?q=";
-    let limit = "&limit=5";
+    let limit = "&limit=1";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
     let requestCityUrl = apiUrl + city + limit + APIKey;
 
@@ -63,13 +62,12 @@ $(document).ready(function () {
 
   function getWeatherData(listLatItem, listLonItem) {
     let apiUrl2 = "https://api.openweathermap.org/data/2.5/forecast?";
-    //   let lat = "lat=44.34";
-    //   let lon = "&lon=10.99";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
     let longitude = "&lon=" + listLonItem;
     let latitude = "lat=" + listLatItem;
+    let units = "&units=imperial";
 
-    let requestDataUrl = apiUrl2 + latitude + longitude + APIKey;
+    let requestDataUrl = apiUrl2 + latitude + longitude + APIKey + units;
 
     fetch(requestDataUrl)
       .then(function (response) {
@@ -82,15 +80,9 @@ $(document).ready(function () {
       })
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          var temp = document.createElement("p");
-          temp.textContent = data[i].main_temp;
+          let temp = document.createElement("p");
+          temp.textContent = data[i].weather;
           tempDataEl.appendChild(temp);
-          var description = document.createElement("p");
-          description.textContent = data[i].weather_description;
-          descriptionDataEl.appendChild(description);
-          var wind = document.createElement("p");
-          wind.textContent = data[i].wind;
-          windDataEl.appendChild(wind);
           console.log("It finally worked");
         }
       });
