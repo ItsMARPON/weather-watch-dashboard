@@ -63,13 +63,17 @@ $(document).ready(function () {
   function getWeatherData(listLatItem, listLonItem) {
     let apiUrl2 = "https://api.openweathermap.org/data/2.5/forecast?";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
-    let longitude = "&lon=" + listLonItem;
     let latitude = "lat=" + listLatItem;
+    let longitude = "&lon=" + listLonItem;
     let units = "&units=imperial";
 
     let requestDataUrl = apiUrl2 + latitude + longitude + APIKey + units;
 
-    fetch(requestDataUrl)
+    fetch(requestDataUrl, {
+      method: "GET",
+      creditentials: "same-origin",
+      redirect: "follow",
+    })
       .then(function (response) {
         if (response.ok) {
           console.log(response);
@@ -80,10 +84,15 @@ $(document).ready(function () {
       })
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          let temp = document.createElement("p");
-          temp.textContent = data[i].weather;
-          tempDataEl.appendChild(temp);
-          console.log("It finally worked");
+          console.log(data);
+          // let weatherResults = document.querySelector("#weather-container");
+          // var test = document.createElement("p");
+
+          // test.textContent = data[i].list;
+
+          // weatherResults.appendChild(test);
+
+          // console.log("It finally worked");
         }
       });
   }
