@@ -83,14 +83,14 @@ $(document).ready(function () {
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
           console.log("success", data);
-          // let weatherResults = document.querySelector("#weather-container");
-          // var test = document.createElement("p");
+          let weatherResults = document.querySelector("#weather-container");
+          var test = document.createElement("p");
 
-          // test.textContent = data[i].list;
+          test.textContent = data[i].list;
 
-          // weatherResults.appendChild(test);
+          weatherResults.appendChild(test);
 
-          // console.log("It finally worked");
+          console.log("It finally worked");
         }
       });
   }
