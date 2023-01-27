@@ -69,11 +69,9 @@ $(document).ready(function () {
 
     let requestDataUrl = apiUrl2 + latitude + longitude + APIKey + units;
 
-    fetch(requestDataUrl, {
-      method: "GET",
-      creditentials: "same-origin",
-      redirect: "follow",
-    })
+    let data = [];
+
+    fetch(requestDataUrl)
       .then(function (response) {
         if (response.ok) {
           console.log(response);
@@ -84,7 +82,7 @@ $(document).ready(function () {
       })
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          console.log(data);
+          console.log("success", data);
           // let weatherResults = document.querySelector("#weather-container");
           // var test = document.createElement("p");
 
