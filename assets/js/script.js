@@ -2,10 +2,6 @@
 // Take user input for City Name (Location) and save to local storage and print to console.
 $(document).ready(function () {
   let mainList = document.querySelector("ul");
-  let tempDataEl = document.querySelector("#temp-data");
-  let descriptionDataEl = document.querySelector("#description-data");
-  let windDataEl = document.querySelector("#wind-data");
-  let cityEl = document.querySelector("#city");
   let city = localStorage.getItem("city") || [];
 
   // Get date and time
@@ -23,7 +19,7 @@ $(document).ready(function () {
   }
   getCityInput();
 
-  // Call API to get weather information
+  // Call API to get city Latitude and Longitude coordinates
 
   function getCityOrGeo() {
     let apiUrl = " https://api.openweathermap.org/geo/1.0/direct?q=";
@@ -59,7 +55,7 @@ $(document).ready(function () {
         }
       });
   }
-
+  //  Call API to get weather data after receiving Latitude and Longitude coordinates
   function getWeatherData(listLatItem, listLonItem) {
     let apiUrl2 = "https://api.openweathermap.org/data/2.5/forecast?";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
@@ -82,14 +78,17 @@ $(document).ready(function () {
       })
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          let weatherResults = document.querySelector("#weather-container");
-          var test = document.createElement("p");
+          let weatherResults = document.getElementById("#weather-container");
+          let tempDataEl = document.getElementById("#temp-data");
+          let descriptionDataEl = document.getElementById("#description-data");
+          let windDataEl = document.getElementById("#wind-data");
 
-          test.textContent = data[i].list;
+          descriptionDataEl.innerHTML = data[i].weather[0].description;
+          weatherResults.innerHTML = data[i].weather[0].icon;
+          tempDataEl.innerHTML = data[i].main[0].temp;
+          windDataEl.innerHTML = data[i].wind[0].gust;
 
-          weatherResults.appendChild(test);
-
-          console.log("It finally worked", data);
+          console.log("It finally worked");
         }
       });
   }
