@@ -77,19 +77,18 @@ $(document).ready(function () {
         }
       })
       .then(function (data) {
-        for (var i = 0; i < data.length; i++) {
-          let weatherResults = document.getElementById("#weather-container");
-          let tempDataEl = document.getElementById("#temp-data");
-          let descriptionDataEl = document.getElementById("#description-data");
-          let windDataEl = document.getElementById("#wind-data");
+        // for (var i = 0; i < data.length; i++) {
+        //   let weatherResults = document.getElementById("#weather-container");
+        //   let tempDataEl = document.getElementById("#temp-data");
+        //   let descriptionDataEl = document.getElementById("#description-data");
+        //   let windDataEl = document.getElementById("#wind-data");
 
-          descriptionDataEl.innerHTML = data[i].weather[0].description;
-          weatherResults.innerHTML = data[i].weather[0].icon;
-          tempDataEl.innerHTML = data[i].main[0].temp;
-          windDataEl.innerHTML = data[i].wind[0].gust;
+        //   descriptionDataEl.innerHTML = data[i].weather[0].description;
+        //   weatherResults.innerHTML = data[i].weather[0].icon;
+        //   tempDataEl.innerHTML = data[i].main[0].temp;
+        //   windDataEl.innerHTML = data[i].wind[0].gust;
 
-          console.log("It finally worked");
-        }
+        console.log(data);
       });
   }
 });
