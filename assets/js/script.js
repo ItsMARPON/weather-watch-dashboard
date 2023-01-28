@@ -76,13 +76,53 @@ $(document).ready(function () {
           alert("Error2:" + response.statusText);
         }
       })
+      // The API displays the weather in 3 hour increments for next 5 days
       .then(function (data) {
+        // Day 1
         document.getElementById("weather-data").textContent =
+          data.list[0].dt_txt;
+        document.getElementById("description-data").textContent =
           data.list[0].weather[0].description;
         document.getElementById("temp-data").textContent =
           data.list[0].main.temp;
         document.getElementById("wind-data").textContent =
           data.list[0].wind.speed;
+        // Day 2
+        document.getElementById("weather-data2").textContent =
+          data.list[7].dt_txt;
+        document.getElementById("description-data2").textContent =
+          data.list[7].weather[0].description;
+        document.getElementById("temp-data2").textContent =
+          data.list[7].main.temp;
+        document.getElementById("wind-data2").textContent =
+          data.list[7].wind.speed;
+        // Day 3
+        document.getElementById("weather-data3").textContent =
+          data.list[15].dt_txt;
+        document.getElementById("description-data3").textContent =
+          data.list[15].weather[0].description;
+        document.getElementById("temp-data3").textContent =
+          data.list[15].main.temp;
+        document.getElementById("wind-data3").textContent =
+          data.list[15].wind.speed;
+        // Day 4
+        document.getElementById("weather-data4").textContent =
+          data.list[26].dt_txt;
+        document.getElementById("description-data4").textContent =
+          data.list[26].weather[0].description;
+        document.getElementById("temp-data4").textContent =
+          data.list[26].main.temp;
+        document.getElementById("wind-data4").textContent =
+          data.list[26].wind.speed;
+        // Day 5
+        document.getElementById("weather-data5").textContent =
+          data.list[39].dt_txt;
+        document.getElementById("description-data5").textContent =
+          data.list[39].weather[0].description;
+        document.getElementById("temp-data5").textContent =
+          data.list[39].main.temp;
+        document.getElementById("wind-data5").textContent =
+          data.list[39].wind.speed;
 
         console.log(data);
       });
