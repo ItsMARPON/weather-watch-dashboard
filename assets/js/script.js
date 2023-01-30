@@ -9,23 +9,21 @@ $(document).ready(function () {
   $("#currentDay").text(today.format("MMMM D, YYYY HH:mm A"));
 
   // Get user Input for City and set to Local storage
-  function getCityInput() {
-    $("#submit-btn").on("click", function (event) {
-      event.preventDefault();
-      let cityName = $("#city").val();
-      localStorage.setItem("city", JSON.stringify(cityName));
-      getCityOrGeo();
-    });
-  }
-  getCityInput();
+
+  $("#submit-btn").on("click", function (event) {
+    event.preventDefault();
+    let cityName = $("#city").val();
+    localStorage.setItem("city", JSON.stringify(cityName));
+    getCityOrGeo(cityName);
+  });
 
   // Call API to get city Latitude and Longitude coordinates
 
-  function getCityOrGeo() {
+  function getCityOrGeo(cityName) {
     let apiUrl = " https://api.openweathermap.org/geo/1.0/direct?q=";
     let limit = "&limit=1";
     let APIKey = "&appid=4f37af9ace93cd2c4a4e0290356285bd";
-    let requestCityUrl = apiUrl + city + limit + APIKey;
+    let requestCityUrl = apiUrl + cityName + limit + APIKey;
 
     fetch(requestCityUrl)
       .then(function (response) {
@@ -37,6 +35,7 @@ $(document).ready(function () {
         }
       })
       .then(function (data) {
+        console.log(data);
         for (var i = 0; i < data.length; i++) {
           var listNameItem = document.createElement("li");
           listNameItem.textContent = data[i].name;
@@ -64,8 +63,6 @@ $(document).ready(function () {
     let units = "&units=imperial";
 
     let requestDataUrl = apiUrl2 + latitude + longitude + APIKey + units;
-
-    let data = [];
 
     fetch(requestDataUrl)
       .then(function (response) {
